@@ -1,6 +1,4 @@
-import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../models/load_status.dart';
 import '../../repositories/movie_repository.dart';
 import 'detail_state.dart';
@@ -13,7 +11,6 @@ class DetailMovieCubit extends Cubit<DetailMovieState> {
   DetailMovieCubit(this.detailRepository, this.movieId) : super(DetailMovieState());
 
   void init() async {
-
     emit(state.copyWith(loadStatus: LoadStatus.loading));
     try {
       final result = await detailRepository.getDetailMovie(movieId);

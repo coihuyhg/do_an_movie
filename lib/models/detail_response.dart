@@ -33,6 +33,7 @@ class DetailResponse {
   });
 
   bool? adult;
+  @JsonKey(name: 'backdrop_path')
   String? backdropPath;
   BelongsToCollection? belongsToCollection;
   int? budget;
@@ -56,7 +57,9 @@ class DetailResponse {
   String? tagline;
   String? title;
   bool? video;
+  @JsonKey(name: 'vote_average')
   double? voteAverage;
+  @JsonKey(name: 'vote_count')
   int? voteCount;
 
   factory DetailResponse.fromJson(Map<String, dynamic> json) => _$DetailResponseFromJson(json);
@@ -99,6 +102,7 @@ class Genre {
   });
 
   int? id;
+  @JsonKey(name: 'name_genre')
   String? name;
 
   factory Genre.fromJson(Map<String, dynamic> json) => Genre(

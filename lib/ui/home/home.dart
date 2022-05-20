@@ -1,9 +1,13 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:do_an_movie/blocs/detail_bloc/detail_cubit.dart';
 import 'package:do_an_movie/blocs/home_bloc/home_cubit.dart';
 import 'package:do_an_movie/blocs/home_bloc/home_state.dart';
 import 'package:do_an_movie/models/now_play_response.dart';
+import 'package:do_an_movie/repositories/movie_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+
+import 'detail_movie.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -59,9 +63,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                   padding: const EdgeInsets.only(top: 20.0),
                   child: _menuBar(context, width * 0.9, height * 0.056),
                 ),
-                SizedBox(
-                  height: height * 0.01,
-                ),
+                SizedBox(height: height * 0.01),
                 Expanded(
                   flex: 2,
                   child: PageView(
@@ -88,45 +90,73 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             ),
                             itemCount: state.nowPlay?.results?.length ?? 0,
                             itemBuilder: (BuildContext context, int index) {
-                              return Container(
-                                margin: const EdgeInsets.all(5),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.center,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    ClipRRect(
-                                      child: Image(
-                                        image: CachedNetworkImageProvider(
-                                            'https://image.tmdb.org/t/p/original${state.nowPlay?.results?[index].posterPath}'),
-                                        width: width * 0.5,
-                                        height: height * 0.33,
-                                        fit: BoxFit.fill,
-                                      ),
+                              return InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return BlocProvider<DetailMovieCubit>(
+                                          create: (context) {
+                                            final repository =
+                                                RepositoryProvider.of<
+                                                    MovieRepository>(context);
+                                            return DetailMovieCubit(
+                                                repository,
+                                                state.nowPlay?.results?[index]
+                                                        .id
+                                                        .toString() ??
+                                                    '');
+                                          },
+                                          child: const DetailMovie(),
+                                        );
+                                      },
                                     ),
-                                    SizedBox(height: height * 0.01),
-                                    Text(
-                                      '${state.nowPlay?.results?[index].title}',
-                                      style: const TextStyle(
-                                          fontSize: 18,
-                                          color: Color(0xFF0F1B2B)),
-                                    ),
-                                    SizedBox(height: height * 0.01),
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          '${state.nowPlay?.results?[index].voteAverage ?? ''} ⭐',
-                                          style: const TextStyle(fontSize: 16),
+                                  );
+                                },
+                                child: Container(
+                                  margin: const EdgeInsets.all(5),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      ClipRRect(
+                                        child: Image(
+                                          image: CachedNetworkImageProvider(
+                                              'https://image.tmdb.org/t/p/original${state.nowPlay?.results?[index].posterPath}'),
+                                          width: width * 0.5,
+                                          height: height * 0.33,
+                                          fit: BoxFit.fill,
                                         ),
-                                        SizedBox(width: width * 0.06),
-                                        Text(
-                                          '${state.nowPlay?.results?[index].voteCount ?? ''}  👍',
-                                          style: const TextStyle(fontSize: 16),
-                                        )
-                                      ],
-                                    ),
-                                  ],
+                                      ),
+                                      SizedBox(height: height * 0.01),
+                                      Text(
+                                        '${state.nowPlay?.results?[index].title}',
+                                        style: const TextStyle(
+                                            fontSize: 18,
+                                            color: Color(0xFF0F1B2B)),
+                                      ),
+                                      SizedBox(height: height * 0.01),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            '${state.nowPlay?.results?[index].voteAverage ?? ''} ⭐',
+                                            style:
+                                                const TextStyle(fontSize: 16),
+                                          ),
+                                          SizedBox(width: width * 0.06),
+                                          Text(
+                                            '${state.nowPlay?.results?[index].voteCount ?? ''} 👍',
+                                            style:
+                                                const TextStyle(fontSize: 16),
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               );
                             },
@@ -147,45 +177,73 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                             ),
                             itemCount: state.upComing?.results?.length ?? 0,
                             itemBuilder: (BuildContext context, int index) {
-                              return Container(
-                                margin: const EdgeInsets.all(5),
-                                child: Column(
-                                  mainAxisAlignment: MainAxisAlignment.start,
-                                  crossAxisAlignment: CrossAxisAlignment.start,
-                                  children: [
-                                    ClipRRect(
-                                      child: Image(
-                                        image: CachedNetworkImageProvider(
-                                            'https://image.tmdb.org/t/p/original${state.upComing?.results?[index].posterPath}'),
-                                        width: width * 0.5,
-                                        height: height * 0.33,
-                                        fit: BoxFit.fill,
-                                      ),
+                              return InkWell(
+                                onTap: () {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) {
+                                        return BlocProvider<DetailMovieCubit>(
+                                          create: (context) {
+                                            final repository =
+                                                RepositoryProvider.of<
+                                                    MovieRepository>(context);
+                                            return DetailMovieCubit(
+                                                repository,
+                                                state.upComing?.results?[index]
+                                                        .id
+                                                        .toString() ??
+                                                    '');
+                                          },
+                                          child: const DetailMovie(),
+                                        );
+                                      },
                                     ),
-                                    SizedBox(height: height * 0.01),
-                                    Text(
-                                      '${state.upComing?.results?[index].title}',
-                                      style: const TextStyle(
-                                          fontSize: 18,
-                                          color: Color(0xFF0F1B2B)),
-                                    ),
-                                    SizedBox(height: height * 0.01),
-                                    Row(
-                                      mainAxisAlignment:
-                                      MainAxisAlignment.start,
-                                      children: [
-                                        Text(
-                                          '${state.upComing?.results?[index].voteAverage ?? ''} ⭐',
-                                          style: const TextStyle(fontSize: 16),
+                                  );
+                                },
+                                child: Container(
+                                  margin: const EdgeInsets.all(5),
+                                  child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      ClipRRect(
+                                        child: Image(
+                                          image: CachedNetworkImageProvider(
+                                              'https://image.tmdb.org/t/p/original${state.upComing?.results?[index].posterPath}'),
+                                          width: width * 0.5,
+                                          height: height * 0.33,
+                                          fit: BoxFit.fill,
                                         ),
-                                        SizedBox(width: width * 0.06),
-                                        Text(
-                                          '${state.upComing?.results?[index].voteCount ?? ''}  👍',
-                                          style: const TextStyle(fontSize: 16),
-                                        )
-                                      ],
-                                    ),
-                                  ],
+                                      ),
+                                      SizedBox(height: height * 0.01),
+                                      Text(
+                                        '${state.upComing?.results?[index].title}',
+                                        style: const TextStyle(
+                                            fontSize: 18,
+                                            color: Color(0xFF0F1B2B)),
+                                      ),
+                                      SizedBox(height: height * 0.01),
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.start,
+                                        children: [
+                                          Text(
+                                            '${state.upComing?.results?[index].voteAverage ?? ''} ⭐',
+                                            style:
+                                                const TextStyle(fontSize: 16),
+                                          ),
+                                          SizedBox(width: width * 0.06),
+                                          Text(
+                                            '${state.upComing?.results?[index].voteCount ?? ''}  👍',
+                                            style:
+                                                const TextStyle(fontSize: 16),
+                                          )
+                                        ],
+                                      ),
+                                    ],
+                                  ),
                                 ),
                               );
                             },

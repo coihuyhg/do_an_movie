@@ -9,7 +9,7 @@ part of 'detail_response.dart';
 DetailResponse _$DetailResponseFromJson(Map<String, dynamic> json) =>
     DetailResponse(
       adult: json['adult'] as bool?,
-      backdropPath: json['backdropPath'] as String?,
+      backdropPath: json['backdrop_path'] as String?,
       belongsToCollection: json['belongsToCollection'] == null
           ? null
           : BelongsToCollection.fromJson(
@@ -44,14 +44,14 @@ DetailResponse _$DetailResponseFromJson(Map<String, dynamic> json) =>
       tagline: json['tagline'] as String?,
       title: json['title'] as String?,
       video: json['video'] as bool?,
-      voteAverage: (json['voteAverage'] as num?)?.toDouble(),
-      voteCount: json['voteCount'] as int?,
+      voteAverage: (json['vote_average'] as num?)?.toDouble(),
+      voteCount: json['vote_count'] as int?,
     );
 
 Map<String, dynamic> _$DetailResponseToJson(DetailResponse instance) =>
     <String, dynamic>{
       'adult': instance.adult,
-      'backdropPath': instance.backdropPath,
+      'backdrop_path': instance.backdropPath,
       'belongsToCollection': instance.belongsToCollection,
       'budget': instance.budget,
       'genres': instance.genres,
@@ -73,6 +73,6 @@ Map<String, dynamic> _$DetailResponseToJson(DetailResponse instance) =>
       'tagline': instance.tagline,
       'title': instance.title,
       'video': instance.video,
-      'voteAverage': instance.voteAverage,
-      'voteCount': instance.voteCount,
+      'vote_average': instance.voteAverage,
+      'vote_count': instance.voteCount,
     };
