@@ -4,9 +4,6 @@ import 'package:do_an_movie/blocs/detail_bloc/detail_state.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-import '../../blocs/home_bloc/home_cubit.dart';
-import '../../blocs/home_bloc/home_state.dart';
-
 class DetailMovie extends StatefulWidget {
   const DetailMovie({Key? key}) : super(key: key);
 
@@ -52,17 +49,23 @@ class _DetailMovieState extends State<DetailMovie>
                     );
             },
           ),
-          Expanded(
-            child: Container(
-              margin: EdgeInsets.only(top: height * 0.36),
-              width: width,
-              height: height,
-              child: BlocBuilder<DetailMovieCubit, DetailMovieState>(
-                bloc: _cubit,
-                buildWhen: (previous, current) =>
-                    previous.loadStatus != current.loadStatus,
-                builder: (context, state) {
-                  return Column(
+          Container(
+            decoration: const BoxDecoration(
+              color: Colors.white,
+              borderRadius: BorderRadius.only(
+                  topLeft: Radius.circular(30),
+                  topRight: Radius.circular(30)),
+            ),
+            margin: EdgeInsets.only(top: height * 0.3),
+            width: width,
+            height: height,
+            child: BlocBuilder<DetailMovieCubit, DetailMovieState>(
+              bloc: _cubit,
+              buildWhen: (previous, current) =>
+                  previous.loadStatus != current.loadStatus,
+              builder: (context, state) {
+                return SingleChildScrollView(
+                  child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
@@ -76,31 +79,32 @@ class _DetailMovieState extends State<DetailMovie>
                               fontWeight: FontWeight.bold),
                         ),
                       ),
-                      // Container(
-                      //     padding: const EdgeInsets.all(10),
-                      //     height: 75,
-                      //     child: ListView.builder(
-                      //       scrollDirection: Axis.horizontal,
-                      //       itemCount: state.detail?.genres?.length ?? 0,
-                      //       itemBuilder: (context, index) {
-                      //         return Container(
-                      //           margin: const EdgeInsets.all(6),
-                      //           width: 100,
-                      //           decoration: BoxDecoration(
-                      //               color: const Color(0xFFE51937),
-                      //               borderRadius: BorderRadius.circular(30)),
-                      //           child: Center(
-                      //             child: Text(
-                      //               state.detail?.genres?[index].name ?? '',
-                      //               style: const TextStyle(
-                      //                 fontSize: 14,
-                      //                 color: Color(0xFFFFFFFF),
-                      //               ),
-                      //             ),
-                      //           ),
-                      //         );
-                      //       },
-                      //     )),
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        height: 75,
+                        child: ListView.builder(
+                          scrollDirection: Axis.horizontal,
+                          itemCount: state.detail?.genres?.length ?? 0,
+                          itemBuilder: (context, index) {
+                            return Container(
+                              margin: const EdgeInsets.all(6),
+                              width: 100,
+                              decoration: BoxDecoration(
+                                  color: const Color(0xFFE51937),
+                                  borderRadius: BorderRadius.circular(30)),
+                              child: Center(
+                                child: Text(
+                                  state.detail?.genres?[index].name ?? '',
+                                  style: const TextStyle(
+                                    fontSize: 14,
+                                    color: Color(0xFFFFFFFF),
+                                  ),
+                                ),
+                              ),
+                            );
+                          },
+                        ),
+                      ),
                       SingleChildScrollView(
                         physics: const ClampingScrollPhysics(),
                         child: GestureDetector(
@@ -111,7 +115,7 @@ class _DetailMovieState extends State<DetailMovie>
                             width: width,
                             height: height,
                             child: Column(
-                              mainAxisSize: MainAxisSize.min,
+                              mainAxisSize: MainAxisSize.max,
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.only(top: 5.0),
@@ -120,10 +124,10 @@ class _DetailMovieState extends State<DetailMovie>
                                 ),
                                 SizedBox(height: height * 0.01),
                                 Expanded(
+                                  flex: 2,
                                   child: PageView(
                                     controller: _pageController,
-                                    physics:
-                                        const AlwaysScrollableScrollPhysics(),
+                                    physics: const ClampingScrollPhysics(),
                                     onPageChanged: (int index) {
                                       FocusScope.of(context)
                                           .requestFocus(FocusNode());
@@ -132,135 +136,179 @@ class _DetailMovieState extends State<DetailMovie>
                                       });
                                     },
                                     children: <Widget>[
-                                      GridView.count(
+                                      Padding(
+                                        padding: EdgeInsets.only(
+                                          top: height * 0.02,
+                                          left: width * 0.04,
+                                          right: width * 0.04,
+                                        ),
+                                        child: Column(
+                                          crossAxisAlignment:
+                                              CrossAxisAlignment.start,
+                                          children: [
+                                            const Text(
+                                              'Synopsis',
+                                              style: TextStyle(
+                                                  fontSize: 20,
+                                                  fontWeight: FontWeight.bold),
+                                            ),
+                                            SizedBox(height: height * 0.01),
+                                            Text(
+                                              state.detail?.overview ?? '',
+                                              style: const TextStyle(
+                                                fontSize: 16,
+                                                color: Color(0x800F1B2B),
+                                              ),
+                                            ),
+                                            SizedBox(height: height * 0.02),
+                                            Row(
+                                              mainAxisAlignment:
+                                                  MainAxisAlignment
+                                                      .spaceBetween,
+                                              children: [
+                                                const Text(
+                                                  'Cast & Crew',
+                                                  style: TextStyle(
+                                                      fontSize: 20,
+                                                      fontWeight:
+                                                          FontWeight.bold),
+                                                ),
+                                                TextButton(
+                                                  onPressed: () {},
+                                                  child: const Text(
+                                                    'View All',
+                                                    style: TextStyle(
+                                                      fontSize: 16,
+                                                      fontWeight:
+                                                          FontWeight.bold,
+                                                      color: Color(0xFF47CFFF),
+                                                    ),
+                                                  ),
+                                                ),
+                                              ],
+                                            ),
+                                            SizedBox(height: height * 0.01),
+                                            //Thêm diễn viên
+                                            Row(
+                                              children: [
+                                                Image.asset('name'),
+                                                const Text('Keanu Reeves')
+                                              ],
+                                            )
+                                          ],
+                                        ),
+                                      ),
+                                      CustomScrollView(
                                         primary: false,
-                                        padding: const EdgeInsets.all(20),
-                                        crossAxisSpacing: 10,
-                                        mainAxisSpacing: 10,
-                                        crossAxisCount: 2,
-                                        children: <Widget>[
-                                          Container(
-                                            padding: const EdgeInsets.all(8),
-                                            color: Colors.teal[100],
-                                            child: const Text(
-                                                "He'd have you all unravel at the"),
-                                          ),
-                                          Container(
-                                            padding: const EdgeInsets.all(8),
-                                            color: Colors.teal[200],
-                                            child: const Text(
-                                                'Heed not the rabble'),
-                                          ),
-                                          Container(
-                                            padding: const EdgeInsets.all(8),
-                                            color: Colors.teal[300],
-                                            child: const Text(
-                                                'Sound of screams but the'),
-                                          ),
-                                          Container(
-                                            padding: const EdgeInsets.all(8),
-                                            color: Colors.teal[400],
-                                            child: const Text('Who scream'),
-                                          ),
-                                          Container(
-                                            padding: const EdgeInsets.all(8),
-                                            color: Colors.teal[500],
-                                            child: const Text(
-                                                'Revolution is coming...'),
-                                          ),
-                                          Container(
-                                            padding: const EdgeInsets.all(8),
-                                            color: Colors.teal[600],
-                                            child: const Text(
-                                                'Revolution, they...'),
+                                        slivers: <Widget>[
+                                          SliverPadding(
+                                            padding: const EdgeInsets.all(20),
+                                            sliver: SliverGrid.count(
+                                              crossAxisSpacing: 10,
+                                              mainAxisSpacing: 10,
+                                              crossAxisCount: 2,
+                                              children: <Widget>[
+                                                Container(
+                                                  padding:
+                                                      const EdgeInsets.all(8),
+                                                  color: Colors.green[100],
+                                                  child: const Text(
+                                                      "He'd have you all unravel at the"),
+                                                ),
+                                                Container(
+                                                  padding:
+                                                      const EdgeInsets.all(8),
+                                                  color: Colors.green[200],
+                                                  child: const Text(
+                                                      'Heed not the rabble'),
+                                                ),
+                                                Container(
+                                                  padding:
+                                                      const EdgeInsets.all(8),
+                                                  color: Colors.green[300],
+                                                  child: const Text(
+                                                      'Sound of screams but the'),
+                                                ),
+                                                Container(
+                                                  padding:
+                                                      const EdgeInsets.all(8),
+                                                  color: Colors.green[400],
+                                                  child:
+                                                      const Text('Who scream'),
+                                                ),
+                                                Container(
+                                                  padding:
+                                                      const EdgeInsets.all(8),
+                                                  color: Colors.green[500],
+                                                  child: const Text(
+                                                      'Revolution is coming...'),
+                                                ),
+                                                Container(
+                                                  padding:
+                                                      const EdgeInsets.all(8),
+                                                  color: Colors.green[600],
+                                                  child: const Text(
+                                                      'Revolution, they...'),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ],
                                       ),
-                                      GridView.count(
+                                      CustomScrollView(
                                         primary: false,
-                                        padding: const EdgeInsets.all(20),
-                                        crossAxisSpacing: 10,
-                                        mainAxisSpacing: 10,
-                                        crossAxisCount: 2,
-                                        children: <Widget>[
-                                          Container(
-                                            padding: const EdgeInsets.all(8),
-                                            color: Colors.teal[100],
-                                            child: const Text(
-                                                "He'd have you all unravel at the"),
-                                          ),
-                                          Container(
-                                            padding: const EdgeInsets.all(8),
-                                            color: Colors.teal[200],
-                                            child: const Text(
-                                                'Heed not the rabble'),
-                                          ),
-                                          Container(
-                                            padding: const EdgeInsets.all(8),
-                                            color: Colors.teal[300],
-                                            child: const Text(
-                                                'Sound of screams but the'),
-                                          ),
-                                          Container(
-                                            padding: const EdgeInsets.all(8),
-                                            color: Colors.teal[400],
-                                            child: const Text('Who scream'),
-                                          ),
-                                          Container(
-                                            padding: const EdgeInsets.all(8),
-                                            color: Colors.teal[500],
-                                            child: const Text(
-                                                'Revolution is coming...'),
-                                          ),
-                                          Container(
-                                            padding: const EdgeInsets.all(8),
-                                            color: Colors.teal[600],
-                                            child: const Text(
-                                                'Revolution, they...'),
-                                          ),
-                                        ],
-                                      ),
-                                      GridView.count(
-                                        primary: false,
-                                        padding: const EdgeInsets.all(20),
-                                        crossAxisSpacing: 10,
-                                        mainAxisSpacing: 10,
-                                        crossAxisCount: 2,
-                                        children: <Widget>[
-                                          Container(
-                                            padding: const EdgeInsets.all(8),
-                                            color: Colors.teal[100],
-                                            child: const Text(
-                                                "He'd have you all unravel at the"),
-                                          ),
-                                          Container(
-                                            padding: const EdgeInsets.all(8),
-                                            color: Colors.teal[200],
-                                            child: const Text(
-                                                'Heed not the rabble'),
-                                          ),
-                                          Container(
-                                            padding: const EdgeInsets.all(8),
-                                            color: Colors.teal[300],
-                                            child: const Text(
-                                                'Sound of screams but the'),
-                                          ),
-                                          Container(
-                                            padding: const EdgeInsets.all(8),
-                                            color: Colors.teal[400],
-                                            child: const Text('Who scream'),
-                                          ),
-                                          Container(
-                                            padding: const EdgeInsets.all(8),
-                                            color: Colors.teal[500],
-                                            child: const Text(
-                                                'Revolution is coming...'),
-                                          ),
-                                          Container(
-                                            padding: const EdgeInsets.all(8),
-                                            color: Colors.teal[600],
-                                            child: const Text(
-                                                'Revolution, they...'),
+                                        slivers: <Widget>[
+                                          SliverPadding(
+                                            padding: const EdgeInsets.all(20),
+                                            sliver: SliverGrid.count(
+                                              crossAxisSpacing: 10,
+                                              mainAxisSpacing: 10,
+                                              crossAxisCount: 2,
+                                              children: <Widget>[
+                                                Container(
+                                                  padding:
+                                                      const EdgeInsets.all(8),
+                                                  color: Colors.green[100],
+                                                  child: const Text(
+                                                      "He'd have you all unravel at the"),
+                                                ),
+                                                Container(
+                                                  padding:
+                                                      const EdgeInsets.all(8),
+                                                  color: Colors.green[200],
+                                                  child: const Text(
+                                                      'Heed not the rabble'),
+                                                ),
+                                                Container(
+                                                  padding:
+                                                      const EdgeInsets.all(8),
+                                                  color: Colors.green[300],
+                                                  child: const Text(
+                                                      'Sound of screams but the'),
+                                                ),
+                                                Container(
+                                                  padding:
+                                                      const EdgeInsets.all(8),
+                                                  color: Colors.green[400],
+                                                  child:
+                                                      const Text('Who scream'),
+                                                ),
+                                                Container(
+                                                  padding:
+                                                      const EdgeInsets.all(8),
+                                                  color: Colors.green[500],
+                                                  child: const Text(
+                                                      'Revolution is coming...'),
+                                                ),
+                                                Container(
+                                                  padding:
+                                                      const EdgeInsets.all(8),
+                                                  color: Colors.green[600],
+                                                  child: const Text(
+                                                      'Revolution, they...'),
+                                                ),
+                                              ],
+                                            ),
                                           ),
                                         ],
                                       )
@@ -273,9 +321,9 @@ class _DetailMovieState extends State<DetailMovie>
                         ),
                       )
                     ],
-                  );
-                },
-              ),
+                  ),
+                );
+              },
             ),
           ),
           Positioned(
@@ -351,9 +399,9 @@ class _DetailMovieState extends State<DetailMovie>
           alignment: Alignment.center,
           decoration: (activePageIndex == 2)
               ? const BoxDecoration(
-            color: Color(0xFFE51937),
-            borderRadius: BorderRadius.all(Radius.circular(25.0)),
-          )
+                  color: Color(0xFFE51937),
+                  borderRadius: BorderRadius.all(Radius.circular(25.0)),
+                )
               : null,
           child: Text(
             "Showtime",
