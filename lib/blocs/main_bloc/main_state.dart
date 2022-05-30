@@ -7,13 +7,11 @@ class MainState extends Equatable {
   MainState({this.selectIndex = 0});
 
   MainState copyWith({
-  int? selectIndex,
-}) {
+    int? selectIndex,
+  }) {
     return MainState(selectIndex: selectIndex ?? this.selectIndex);
   }
 
   @override
-  List<Object> get props => [
-    selectIndex,
-  ];
+  List<Object> get props => [selectIndex];
 }

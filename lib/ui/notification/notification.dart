@@ -10,6 +10,8 @@ class Notifi extends StatefulWidget {
 class _NotifiState extends State<Notifi> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Container(
+      color: Colors.blue,
+    );
   }
 }

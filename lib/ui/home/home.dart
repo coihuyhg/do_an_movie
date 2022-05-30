@@ -146,7 +146,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                                             MainAxisAlignment.start,
                                         children: [
                                           Text(
-                                            '${state.upComing?.results?[index].voteAverage ?? ''} ⭐',
+                                            '⭐ ${state.upComing?.results?[index].voteAverage ?? ''}',
                                             style:
                                                 const TextStyle(fontSize: 16),
                                           ),

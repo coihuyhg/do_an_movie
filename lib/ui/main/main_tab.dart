@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
 
 enum MainTab {
   home,
@@ -22,19 +23,19 @@ extension MainTabExtension on MainTab {
     switch (this) {
       case MainTab.home:
         return BottomNavigationBarItem(
-            icon: Image.asset('assets/icons/ic_movie-reel@2x.png'),
+            icon: Image.asset('assets/icons/ic_movie-reel.png'),
             label: 'Home');
       case MainTab.ticket:
         return BottomNavigationBarItem(
-            icon: Image.asset('assets/icons/ic_event-ticket@2x.png'),
+            icon: Image.asset('assets/icons/ic_event-ticket.png'),
             label: 'Ticket');
       case MainTab.notification:
         return BottomNavigationBarItem(
-            icon: Image.asset('assets/icons/ic_alarm@2x.png'),
+            icon: Image.asset('assets/icons/ic_alarm.png'),
             label: 'Notification');
       case MainTab.user:
         return BottomNavigationBarItem(
-            icon: Image.asset('assets/icons/ic_single-03@2x.png'),
+            icon: Image.asset('assets/icons/ic_single-03.png'),
             label: 'User');
     }
   }

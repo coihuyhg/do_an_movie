@@ -6,7 +6,7 @@ import '../../blocs/main_bloc/main_state.dart';
 import '../home/home.dart';
 import '../notification/notification.dart';
 import '../ticket/ticket.dart';
-import '../user/user.dart';
+import '../user/login.dart';
 import 'main_tab.dart';
 
 class MainUi extends StatefulWidget {
@@ -31,9 +31,9 @@ class _MainUiState extends State<MainUi> {
 
   @override
   void initState() {
+    _cubit = MainCubit();
     // TODO: implement initState
     super.initState();
-    _cubit = BlocProvider.of(context);
     pageController = PageController();
     pageList = const [
       Home(),
@@ -73,8 +73,15 @@ class _MainUiState extends State<MainUi> {
       buildWhen: (prev, current) {
         return prev.selectIndex != current.selectIndex;
       },
-      builder: (context, current) {
+      builder: (context, state) {
         return BottomNavigationBar(
+          showSelectedLabels: false,
+          showUnselectedLabels: false,
+          backgroundColor: Color(0xFFFFFFFF),
+          currentIndex: state.selectIndex,
+          unselectedItemColor: Colors.red,
+          selectedItemColor: Colors.green,
+          type: BottomNavigationBarType.fixed,
           items: tabs.map((e) => e.tab).toList(),
           onTap: (index) {
             _cubit.tap(index);
