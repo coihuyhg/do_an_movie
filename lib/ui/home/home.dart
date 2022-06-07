@@ -185,8 +185,28 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         List<Result> results = state.nowPlay?.results ?? [];
         List<MovieItemWidget> widgets = results
             .map((e) => MovieItemWidget(
-                  resultEntity: e,
-                ))
+                onTap: () {
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //     builder: (context) {
+                  //       return BlocProvider<DetailMovieCubit>(
+                  //         create: (context) {
+                  //           final repository =
+                  //               RepositoryProvider.of<MovieRepository>(
+                  //                   context);
+                  //           return DetailMovieCubit(
+                  //               repository,
+                  //               state.upComing?.results?[e].id.toString() ??
+                  //                   '');
+                  //         },
+                  //         child: const DetailMovie(),
+                  //       );
+                  //     },
+                  //   ),
+                  // );
+                },
+                resultEntity: e))
             .toList();
         return Padding(
           padding: const EdgeInsets.symmetric(horizontal: 18),

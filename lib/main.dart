@@ -3,6 +3,7 @@ import 'package:do_an_movie/networks/api_client.dart';
 import 'package:do_an_movie/networks/api_util.dart';
 import 'package:do_an_movie/ui/home/home.dart';
 import 'package:do_an_movie/ui/main/main_ui.dart';
+import 'package:do_an_movie/ui/splash/splash.dart';
 import 'package:do_an_movie/ui/user/login.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -52,7 +53,9 @@ class _MyAppState extends State<MyApp> {
         child: const MaterialApp(
           debugShowCheckedModeBanner: false,
           title: 'Movie',
-          home: MainUi(),
+          home:
+          Splash()
+          // MainUi(),
         ),
       ),
     );

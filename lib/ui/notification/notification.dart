@@ -10,8 +10,17 @@ class Notifi extends StatefulWidget {
 class _NotifiState extends State<Notifi> {
   @override
   Widget build(BuildContext context) {
-    return Container(
-      color: Colors.blue,
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          'Notifications',
+          style: (TextStyle(fontSize: 26, color: Color(0xFF0F1B2B))),
+        ),
+        backgroundColor: Color(0xFFFFFFFF),
+      ),
+      body: const Center(
+        child: Text('Notification'),
+      ),
     );
   }
 }

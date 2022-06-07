@@ -1,6 +1,7 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:do_an_movie/blocs/detail_bloc/detail_cubit.dart';
 import 'package:do_an_movie/blocs/detail_bloc/detail_state.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -53,8 +54,7 @@ class _DetailMovieState extends State<DetailMovie>
             decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(30),
-                  topRight: Radius.circular(30)),
+                  topLeft: Radius.circular(30), topRight: Radius.circular(30)),
             ),
             margin: EdgeInsets.only(top: height * 0.3),
             width: width,
@@ -136,182 +136,10 @@ class _DetailMovieState extends State<DetailMovie>
                                       });
                                     },
                                     children: <Widget>[
-                                      Padding(
-                                        padding: EdgeInsets.only(
-                                          top: height * 0.02,
-                                          left: width * 0.04,
-                                          right: width * 0.04,
-                                        ),
-                                        child: Column(
-                                          crossAxisAlignment:
-                                              CrossAxisAlignment.start,
-                                          children: [
-                                            const Text(
-                                              'Synopsis',
-                                              style: TextStyle(
-                                                  fontSize: 20,
-                                                  fontWeight: FontWeight.bold),
-                                            ),
-                                            SizedBox(height: height * 0.01),
-                                            Text(
-                                              state.detail?.overview ?? '',
-                                              style: const TextStyle(
-                                                fontSize: 16,
-                                                color: Color(0x800F1B2B),
-                                              ),
-                                            ),
-                                            SizedBox(height: height * 0.02),
-                                            Row(
-                                              mainAxisAlignment:
-                                                  MainAxisAlignment
-                                                      .spaceBetween,
-                                              children: [
-                                                const Text(
-                                                  'Cast & Crew',
-                                                  style: TextStyle(
-                                                      fontSize: 20,
-                                                      fontWeight:
-                                                          FontWeight.bold),
-                                                ),
-                                                TextButton(
-                                                  onPressed: () {},
-                                                  child: const Text(
-                                                    'View All',
-                                                    style: TextStyle(
-                                                      fontSize: 16,
-                                                      fontWeight:
-                                                          FontWeight.bold,
-                                                      color: Color(0xFF47CFFF),
-                                                    ),
-                                                  ),
-                                                ),
-                                              ],
-                                            ),
-                                            SizedBox(height: height * 0.01),
-                                            //Thêm diễn viên
-                                            Row(
-                                              children: [
-                                                Image.asset('name'),
-                                                const Text('Keanu Reeves')
-                                              ],
-                                            )
-                                          ],
-                                        ),
-                                      ),
-                                      CustomScrollView(
-                                        primary: false,
-                                        slivers: <Widget>[
-                                          SliverPadding(
-                                            padding: const EdgeInsets.all(20),
-                                            sliver: SliverGrid.count(
-                                              crossAxisSpacing: 10,
-                                              mainAxisSpacing: 10,
-                                              crossAxisCount: 2,
-                                              children: <Widget>[
-                                                Container(
-                                                  padding:
-                                                      const EdgeInsets.all(8),
-                                                  color: Colors.green[100],
-                                                  child: const Text(
-                                                      "He'd have you all unravel at the"),
-                                                ),
-                                                Container(
-                                                  padding:
-                                                      const EdgeInsets.all(8),
-                                                  color: Colors.green[200],
-                                                  child: const Text(
-                                                      'Heed not the rabble'),
-                                                ),
-                                                Container(
-                                                  padding:
-                                                      const EdgeInsets.all(8),
-                                                  color: Colors.green[300],
-                                                  child: const Text(
-                                                      'Sound of screams but the'),
-                                                ),
-                                                Container(
-                                                  padding:
-                                                      const EdgeInsets.all(8),
-                                                  color: Colors.green[400],
-                                                  child:
-                                                      const Text('Who scream'),
-                                                ),
-                                                Container(
-                                                  padding:
-                                                      const EdgeInsets.all(8),
-                                                  color: Colors.green[500],
-                                                  child: const Text(
-                                                      'Revolution is coming...'),
-                                                ),
-                                                Container(
-                                                  padding:
-                                                      const EdgeInsets.all(8),
-                                                  color: Colors.green[600],
-                                                  child: const Text(
-                                                      'Revolution, they...'),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      ),
-                                      CustomScrollView(
-                                        primary: false,
-                                        slivers: <Widget>[
-                                          SliverPadding(
-                                            padding: const EdgeInsets.all(20),
-                                            sliver: SliverGrid.count(
-                                              crossAxisSpacing: 10,
-                                              mainAxisSpacing: 10,
-                                              crossAxisCount: 2,
-                                              children: <Widget>[
-                                                Container(
-                                                  padding:
-                                                      const EdgeInsets.all(8),
-                                                  color: Colors.green[100],
-                                                  child: const Text(
-                                                      "He'd have you all unravel at the"),
-                                                ),
-                                                Container(
-                                                  padding:
-                                                      const EdgeInsets.all(8),
-                                                  color: Colors.green[200],
-                                                  child: const Text(
-                                                      'Heed not the rabble'),
-                                                ),
-                                                Container(
-                                                  padding:
-                                                      const EdgeInsets.all(8),
-                                                  color: Colors.green[300],
-                                                  child: const Text(
-                                                      'Sound of screams but the'),
-                                                ),
-                                                Container(
-                                                  padding:
-                                                      const EdgeInsets.all(8),
-                                                  color: Colors.green[400],
-                                                  child:
-                                                      const Text('Who scream'),
-                                                ),
-                                                Container(
-                                                  padding:
-                                                      const EdgeInsets.all(8),
-                                                  color: Colors.green[500],
-                                                  child: const Text(
-                                                      'Revolution is coming...'),
-                                                ),
-                                                Container(
-                                                  padding:
-                                                      const EdgeInsets.all(8),
-                                                  color: Colors.green[600],
-                                                  child: const Text(
-                                                      'Revolution, they...'),
-                                                ),
-                                              ],
-                                            ),
-                                          ),
-                                        ],
-                                      )
+                                      detailTap(state.detail?.overview ?? ''),
+                                      reviewsTap(
+                                          '${state.detail?.voteAverage ?? ''}/10 ⭐'),
+                                      showTimeTap(),
                                     ],
                                   ),
                                 ),
@@ -364,6 +192,314 @@ class _DetailMovieState extends State<DetailMovie>
               ),
             ),
           ),
+        ],
+      ),
+    );
+  }
+
+  Widget showTimeTap() {
+    return Padding(
+      padding: const EdgeInsets.all(20),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                'Chosse Date',
+                style: TextStyle(
+                    fontSize: 20,
+                    color: Color(0xFF0F1B2B),
+                    fontWeight: FontWeight.bold),
+              ),
+              Image.asset('assets/icons/ic_calendar.png')
+            ],
+          ),
+          const Text(
+            'Chosse Cinema',
+            style: TextStyle(
+                fontSize: 20,
+                color: Color(0xFF0F1B2B),
+                fontWeight: FontWeight.bold),
+          ),
+          const Text(
+            '2D',
+            style: TextStyle(fontSize: 20, color: Color(0x800F1B2B)),
+          ),
+          const Text(
+            'Imax',
+            style: TextStyle(fontSize: 20, color: Color(0x800F1B2B)),
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget reviewsTap(String rate) {
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        children: [
+          Text(
+            rate,
+            style: const TextStyle(
+                fontSize: 32,
+                color: Color(0xFF0F1B2B),
+                fontWeight: FontWeight.bold),
+          ),
+          const Text(
+            '38 Reviews',
+            style: TextStyle(fontSize: 18, color: Color(0x800F1B2B)),
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget detailTap(String text) {
+    return Padding(
+      padding: const EdgeInsets.all(20.0),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text(
+            'Synopsis',
+            style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+          ),
+          const SizedBox(height: 10),
+          Text(
+            text,
+            // state.detail?.overview ?? '',
+            style: const TextStyle(
+              fontSize: 16,
+              color: Color(0x800F1B2B),
+            ),
+          ),
+          const SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                'Cast & Crew',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: const Text(
+                  'View All',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF47CFFF),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          //Thêm diễn viên
+          Row(
+            children: [
+              Image.asset('assets/icons/ic_calendar.png'),
+              const Text('Keanu Reeves')
+            ],
+          ),
+          const SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                'Photos',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: const Text(
+                  'View All',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF47CFFF),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Expanded(
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                Container(
+                    margin: const EdgeInsets.only(right: 10),
+                    color: Colors.redAccent,
+                    width: 104,
+                    height: 72),
+                Container(
+                    margin: const EdgeInsets.only(right: 10),
+                    color: Colors.amber,
+                    width: 104,
+                    height: 72),
+                Container(
+                    margin: const EdgeInsets.only(right: 10),
+                    color: Colors.greenAccent,
+                    width: 104,
+                    height: 72),
+                Container(
+                    margin: const EdgeInsets.only(right: 10),
+                    color: Colors.blueAccent,
+                    width: 104,
+                    height: 72),
+              ],
+            ),
+          ),
+          const SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                'Videos',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: const Text(
+                  'View All',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF47CFFF),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Expanded(
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                Container(
+                    margin: const EdgeInsets.only(right: 10),
+                    color: Colors.redAccent,
+                    width: 104,
+                    height: 72),
+                Container(
+                    margin: const EdgeInsets.only(right: 10),
+                    color: Colors.amber,
+                    width: 104,
+                    height: 72),
+                Container(
+                    margin: const EdgeInsets.only(right: 10),
+                    color: Colors.greenAccent,
+                    width: 104,
+                    height: 72),
+                Container(
+                    margin: const EdgeInsets.only(right: 10),
+                    color: Colors.blueAccent,
+                    width: 104,
+                    height: 72),
+              ],
+            ),
+          ),
+          const SizedBox(height: 20),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              const Text(
+                'Blogs About This Film',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: const Text(
+                  'View All',
+                  style: TextStyle(
+                    fontSize: 16,
+                    fontWeight: FontWeight.bold,
+                    color: Color(0xFF47CFFF),
+                  ),
+                ),
+              ),
+            ],
+          ),
+          const SizedBox(height: 10),
+          Expanded(
+            child: ListView(
+              scrollDirection: Axis.horizontal,
+              children: [
+                Column(
+                  children: [
+                    Container(
+                        margin: const EdgeInsets.only(right: 10),
+                        color: Colors.redAccent,
+                        width: 104,
+                        height: 72),
+                    const Text(
+                      '3 hours ago',
+                      style: TextStyle(fontSize: 14, color: Color(0x800F1B2B)),
+                    ),
+                    const Text(
+                      'Female Action Starts We Can\'t Wait',
+                      style: TextStyle(fontSize: 16, color: Color(0xFF0F1B2B)),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Container(
+                        margin: const EdgeInsets.only(right: 10),
+                        color: Colors.redAccent,
+                        width: 104,
+                        height: 72),
+                    const Text(
+                      '3 hours ago',
+                      style: TextStyle(fontSize: 14, color: Color(0x800F1B2B)),
+                    ),
+                    const Text(
+                      'Female Action Starts We Can\'t Wait',
+                      style: TextStyle(fontSize: 16, color: Color(0xFF0F1B2B)),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Container(
+                        margin: const EdgeInsets.only(right: 10),
+                        color: Colors.redAccent,
+                        width: 104,
+                        height: 72),
+                    const Text(
+                      '3 hours ago',
+                      style: TextStyle(fontSize: 14, color: Color(0x800F1B2B)),
+                    ),
+                    const Text(
+                      'Female Action Starts We Can\'t Wait',
+                      style: TextStyle(fontSize: 16, color: Color(0xFF0F1B2B)),
+                    ),
+                  ],
+                ),
+                Column(
+                  children: [
+                    Container(
+                        margin: const EdgeInsets.only(right: 10),
+                        color: Colors.redAccent,
+                        width: 104,
+                        height: 72),
+                    const Text(
+                      '3 hours ago',
+                      style: TextStyle(fontSize: 14, color: Color(0x800F1B2B)),
+                    ),
+                    const Text(
+                      'Female Action Starts We Can\'t Wait',
+                      style: TextStyle(fontSize: 16, color: Color(0xFF0F1B2B)),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          )
         ],
       ),
     );

@@ -4,16 +4,18 @@ import '../../../models/now_play_response.dart';
 
 class MovieItemWidget extends StatelessWidget {
   final Result resultEntity;
+  final VoidCallback onTap;
 
   const MovieItemWidget({
     Key? key,
     required this.resultEntity,
+    required this.onTap,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: () {},
+      onTap: onTap,
       child: Container(
         margin: const EdgeInsets.all(5),
         child: Column(
