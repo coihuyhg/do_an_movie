@@ -18,48 +18,137 @@ class _TicketState extends State<Ticket> {
         ),
         backgroundColor: const Color(0xFFFFFFFF),
       ),
-      body: Stack(
-        children: [
-          Image.asset('name'),
-          Container(
-            width: MediaQuery.of(context).size.width,
-            height: MediaQuery.of(context).size.height,
-            color: Colors.blue,
-            child: Column(
-              children: [
-                const Text('John Wick 3: Parabellum'),
-                const Text('Threatre'),
-                const Text('Paragon Cinema'),
-                Row(
-                  children: const [
-                    Text('Date'),
-                    Text('Time')
-                  ],
-                ),
-                Row(
-                  children: const [
-                    Text('24 May, 2019'),
-                    Text('8:30 - 10:00 AM'),
-                  ],
-                ),
-                Row(
-                  children: [
-                    Text('Hall'.toUpperCase()),
-                    Text('Row'.toUpperCase()),
-                    Text('Seat'.toUpperCase())
-                  ],
-                ),
-                Row(
-                  children: const [
-                    Text('C'),
-                    Text('E'),
-                    Text('E4, E5')
-                  ],
-                ),
-              ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            Image.asset(
+              'assets/image/img_MaskGroup.png',
+              fit: BoxFit.cover,
             ),
-          )
-        ],
+            Container(
+              padding: const EdgeInsets.all(24.0),
+              margin: const EdgeInsets.only(left: 26, right: 26),
+              // width: MediaQuery.of(context).size.width,
+              // height: MediaQuery.of(context).size.height,
+              color: const Color(0xFFFFFFFF),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const Text(
+                    'John Wick 3: Parabellum',
+                    style: TextStyle(fontSize: 20, color: Color(0xFF0F1B2B)),
+                  ),
+                  const SizedBox(height: 16),
+                  const Text(
+                    'Threatre',
+                    style: TextStyle(fontSize: 14, color: Color(0x800F1B2B)),
+                  ),
+                  const SizedBox(height: 4),
+                  const Text(
+                    'Paragon Cinema',
+                    style: TextStyle(fontSize: 16, color: Color(0xFF0F1B2B)),
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    children: const [
+                      Expanded(
+                        child: Text(
+                          'Date',
+                          style:
+                              TextStyle(fontSize: 14, color: Color(0x800F1B2B)),
+                        ),
+                      ),
+                      Expanded(
+                        child: Text(
+                          'Time',
+                          style:
+                              TextStyle(fontSize: 14, color: Color(0x800F1B2B)),
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(height: 4),
+                  Row(
+                    children: const [
+                      Expanded(
+                        child: Text(
+                          '24 May, 2019',
+                          style:
+                              TextStyle(fontSize: 16, color: Color(0xFF0F1B2B)),
+                        ),
+                      ),
+                      Expanded(
+                        child: Text(
+                          '8:30 - 10:00 AM',
+                          style:
+                              TextStyle(fontSize: 16, color: Color(0xFF0F1B2B)),
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 16),
+                  Row(
+                    children: [
+                      Expanded(
+                        flex: 1,
+                        child: Text(
+                          'Hall'.toUpperCase(),
+                          style: const TextStyle(
+                              fontSize: 14, color: Color(0x800F1B2B)),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Text(
+                          'Row'.toUpperCase(),
+                          style: const TextStyle(
+                              fontSize: 14, color: Color(0x800F1B2B)),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Text(
+                          'Seat'.toUpperCase(),
+                          style: const TextStyle(
+                              fontSize: 14, color: Color(0x800F1B2B)),
+                        ),
+                      )
+                    ],
+                  ),
+                  const SizedBox(height: 4),
+                  Row(
+                    children: const [
+                      Expanded(
+                        flex: 1,
+                        child: Text(
+                          'C',
+                          style:
+                              TextStyle(fontSize: 16, color: Color(0xFF0F1B2B)),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 1,
+                        child: Text(
+                          'E',
+                          style:
+                              TextStyle(fontSize: 16, color: Color(0xFF0F1B2B)),
+                        ),
+                      ),
+                      Expanded(
+                        flex: 2,
+                        child: Text(
+                          'E4, E5',
+                          style:
+                              TextStyle(fontSize: 16, color: Color(0xFF0F1B2B)),
+                        ),
+                      )
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }

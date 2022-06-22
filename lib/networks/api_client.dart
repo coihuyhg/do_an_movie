@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:do_an_movie/models/cast_response.dart';
 import 'package:do_an_movie/models/detail_response.dart';
 import 'package:do_an_movie/models/now_play_response.dart';
 import 'package:do_an_movie/models/up_coming_response.dart';
@@ -21,4 +22,7 @@ abstract class ApiClient {
 
   @GET('/movie/{movie_id}?api_key=$key')
   Future<DetailResponse> getDetail(@Path("movie_id") String movieId);
+
+  @GET(('/movie/{movie_id}/credits?api_key=$key'))
+  Future<CastResponse> getCast(@Path("movie_id") String movieID);
 }

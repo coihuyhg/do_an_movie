@@ -14,7 +14,7 @@ class UpComingResponse {
 
   Dates? dates;
   int? page;
-  List<Result>? results;
+  List<Result1>? results;
   int? totalPages;
   int? totalResults;
 
@@ -53,8 +53,8 @@ class Dates {
 }
 
 @JsonSerializable()
-class Result {
-  Result({
+class Result1 {
+  Result1({
     this.adult,
     this.backdropPath,
     this.genreIds,
@@ -89,7 +89,7 @@ class Result {
   @JsonKey(name: 'vote_count')
   int? voteCount;
 
-  factory Result.fromJson(Map<String, dynamic> json) => _$ResultFromJson(json);
+  factory Result1.fromJson(Map<String, dynamic> json) => _$ResultFromJson(json);
 
   Map<String, dynamic> toJson() => {
         "adult": adult,

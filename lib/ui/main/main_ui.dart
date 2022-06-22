@@ -79,8 +79,8 @@ class _MainUiState extends State<MainUi> {
           showUnselectedLabels: false,
           backgroundColor: const Color(0xFFFFFFFF),
           currentIndex: state.selectIndex,
-          // unselectedItemColor: Colors.red,
-          // selectedItemColor: Colors.green,
+          unselectedItemColor: const Color(0xFF0F1B2B),
+          selectedItemColor: const Color(0xFF47CFFF),
           type: BottomNavigationBarType.fixed,
           items: tabs.map((e) => e.tab).toList(),
           onTap: (index) {

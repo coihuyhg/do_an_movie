@@ -49,7 +49,7 @@ class _HistoryState extends State<History> {
                           child:
                               Image.asset('${listHistory[index]['img']}'),
                         ),
-                        SizedBox(width: 12),
+                        const SizedBox(width: 12),
                         Expanded(
                           flex: 3,
                           child: Column(

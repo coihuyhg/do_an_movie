@@ -1,16 +1,17 @@
 import 'package:flutter/material.dart';
 
+// ignore: must_be_immutable
 class UserTexField extends StatelessWidget {
-  String? image;
+  final String image;
 
-  UserTexField({Key? key, this.image}) : super(key: key);
+  const UserTexField({Key? key, required this.image}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return TextField(
       decoration: InputDecoration(
         border: OutlineInputBorder(borderRadius: BorderRadius.circular(4)),
-        prefixIcon: Image.asset(image!),
+        prefixIcon: Image.asset(image),
       ),
     );
   }

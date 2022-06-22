@@ -1,10 +1,11 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:do_an_movie/blocs/detail_bloc/detail_cubit.dart';
 import 'package:do_an_movie/blocs/home_bloc/home_cubit.dart';
 import 'package:do_an_movie/blocs/home_bloc/home_state.dart';
 import 'package:do_an_movie/models/now_play_response.dart';
+import 'package:do_an_movie/models/up_coming_response.dart';
 import 'package:do_an_movie/repositories/movie_repository.dart';
-import 'package:do_an_movie/ui/home/widgets/movie_item_widget.dart';
+import 'package:do_an_movie/ui/home/widgets/movie_item_upcoming_widget.dart';
+import 'package:do_an_movie/ui/home/widgets/movie_item_now_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -18,7 +19,6 @@ class Home extends StatefulWidget {
 }
 
 class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
-  late List<Result> movies;
   late HomeCubit _cubit;
   late PageController _pageController;
   int activePageIndex = 0;
@@ -79,93 +79,7 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
                     },
                     children: <Widget>[
                       _buildListFirst(),
-                      BlocBuilder<HomeCubit, HomeState>(
-                        bloc: _cubit,
-                        buildWhen: (pre, cur) =>
-                            pre.loadStatus != cur.loadStatus,
-                        builder: (context, state) {
-                          return GridView.builder(
-                            padding: const EdgeInsets.all(18),
-                            gridDelegate:
-                                const SliverGridDelegateWithFixedCrossAxisCount(
-                              mainAxisExtent: 360,
-                              crossAxisCount: 2,
-                            ),
-                            itemCount: state.upComing?.results?.length ?? 0,
-                            itemBuilder: (BuildContext context, int index) {
-                              return InkWell(
-                                onTap: () {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) {
-                                        return BlocProvider<DetailMovieCubit>(
-                                          create: (context) {
-                                            final repository =
-                                                RepositoryProvider.of<
-                                                    MovieRepository>(context);
-                                            return DetailMovieCubit(
-                                                repository,
-                                                state.upComing?.results?[index]
-                                                        .id
-                                                        .toString() ??
-                                                    '');
-                                          },
-                                          child: const DetailMovie(),
-                                        );
-                                      },
-                                    ),
-                                  );
-                                },
-                                child: Container(
-                                  margin: const EdgeInsets.all(5),
-                                  child: Column(
-                                    mainAxisAlignment: MainAxisAlignment.start,
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.start,
-                                    children: [
-                                      ClipRRect(
-                                        child: Image(
-                                          image: CachedNetworkImageProvider(
-                                              'https://image.tmdb.org/t/p/original${state.upComing?.results?[index].posterPath}'),
-                                          width: width * 0.5,
-                                          height: height * 0.33,
-                                          fit: BoxFit.fill,
-                                        ),
-                                      ),
-                                      SizedBox(height: height * 0.01),
-                                      Text(
-                                        '${state.upComing?.results?[index].title}',
-                                        style: const TextStyle(
-                                            fontSize: 18,
-                                            color: Color(0xFF0F1B2B)),
-                                      ),
-                                      SizedBox(height: height * 0.01),
-                                      Row(
-                                        mainAxisAlignment:
-                                            MainAxisAlignment.start,
-                                        children: [
-                                          Text(
-                                            '⭐ ${state.upComing?.results?[index].voteAverage ?? ''}',
-                                            style:
-                                                const TextStyle(fontSize: 16),
-                                          ),
-                                          SizedBox(width: width * 0.06),
-                                          Text(
-                                            '${state.upComing?.results?[index].voteCount ?? ''}  👍',
-                                            style:
-                                                const TextStyle(fontSize: 16),
-                                          )
-                                        ],
-                                      ),
-                                    ],
-                                  ),
-                                ),
-                              );
-                            },
-                          );
-                        },
-                      ),
+                      _buildListSecond(),
                     ],
                   ),
                 ),
@@ -177,6 +91,51 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
     );
   }
 
+  Widget _buildListSecond() {
+    return BlocBuilder<HomeCubit, HomeState>(
+      bloc: _cubit,
+      buildWhen: (pre, cur) => pre.loadStatus != cur.loadStatus,
+      builder: (context, state) {
+        List<Result1> results1 = state.upComing?.results ?? [];
+        List<MovieItemUpComingWidget> widgets1 = results1
+            .map((e) => MovieItemUpComingWidget(
+                onTap: (entity) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return BlocProvider<DetailMovieCubit>(
+                          create: (context) {
+                            final repository =
+                                RepositoryProvider.of<MovieRepository>(context);
+                            return DetailMovieCubit(
+                                repository, entity.id.toString());
+                          },
+                          child: const DetailMovie(),
+                        );
+                      },
+                    ),
+                  );
+                },
+                resultEntity: e))
+            .toList();
+        return Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 18),
+          child: GridView.count(
+            crossAxisCount: 2,
+            childAspectRatio: (164 / 320),
+            mainAxisSpacing: 27,
+            crossAxisSpacing: 12,
+            controller: ScrollController(keepScrollOffset: false),
+            shrinkWrap: true,
+            scrollDirection: Axis.vertical,
+            children: widgets1,
+          ),
+        );
+      },
+    );
+  }
+
   Widget _buildListFirst() {
     return BlocBuilder<HomeCubit, HomeState>(
       bloc: _cubit,
@@ -185,26 +144,23 @@ class _HomeState extends State<Home> with SingleTickerProviderStateMixin {
         List<Result> results = state.nowPlay?.results ?? [];
         List<MovieItemWidget> widgets = results
             .map((e) => MovieItemWidget(
-                onTap: () {
-                  // Navigator.push(
-                  //   context,
-                  //   MaterialPageRoute(
-                  //     builder: (context) {
-                  //       return BlocProvider<DetailMovieCubit>(
-                  //         create: (context) {
-                  //           final repository =
-                  //               RepositoryProvider.of<MovieRepository>(
-                  //                   context);
-                  //           return DetailMovieCubit(
-                  //               repository,
-                  //               state.upComing?.results?[e].id.toString() ??
-                  //                   '');
-                  //         },
-                  //         child: const DetailMovie(),
-                  //       );
-                  //     },
-                  //   ),
-                  // );
+                onTap: (entity) {
+                  Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (context) {
+                        return BlocProvider<DetailMovieCubit>(
+                          create: (context) {
+                            final repository =
+                                RepositoryProvider.of<MovieRepository>(context);
+                            return DetailMovieCubit(
+                                repository, entity.id.toString());
+                          },
+                          child: const DetailMovie(),
+                        );
+                      },
+                    ),
+                  );
                 },
                 resultEntity: e))
             .toList();

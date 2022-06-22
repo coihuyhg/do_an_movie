@@ -1,9 +1,15 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:do_an_movie/blocs/detail_bloc/detail_cubit.dart';
 import 'package:do_an_movie/blocs/detail_bloc/detail_state.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:do_an_movie/models/cast_response.dart';
+import 'package:do_an_movie/ui/home/cast.dart';
+import 'package:do_an_movie/ui/home/widgets/item_cast_widget.dart';
+import 'package:do_an_movie/ui/home/widgets/star_item.dart';
+import 'package:do_an_movie/ui/user/widgets/button.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_rating_bar/flutter_rating_bar.dart';
+import 'package:readmore/readmore.dart';
 
 class DetailMovie extends StatefulWidget {
   const DetailMovie({Key? key}) : super(key: key);
@@ -14,6 +20,7 @@ class DetailMovie extends StatefulWidget {
 
 class _DetailMovieState extends State<DetailMovie>
     with SingleTickerProviderStateMixin {
+  String dropdownValue = 'Paragon Cinema';
   late DetailMovieCubit _cubit;
   late PageController _pageController;
   int activePageIndex = 0;
@@ -105,6 +112,8 @@ class _DetailMovieState extends State<DetailMovie>
                           },
                         ),
                       ),
+                      StarItem(rate: state.detail?.voteAverage ?? 0),
+                      const SizedBox(height: 40),
                       SingleChildScrollView(
                         physics: const ClampingScrollPhysics(),
                         child: GestureDetector(
@@ -115,7 +124,6 @@ class _DetailMovieState extends State<DetailMovie>
                             width: width,
                             height: height,
                             child: Column(
-                              mainAxisSize: MainAxisSize.max,
                               children: [
                                 Padding(
                                   padding: const EdgeInsets.only(top: 5.0),
@@ -138,7 +146,7 @@ class _DetailMovieState extends State<DetailMovie>
                                     children: <Widget>[
                                       detailTap(state.detail?.overview ?? ''),
                                       reviewsTap(
-                                          '${state.detail?.voteAverage ?? ''}/10 ⭐'),
+                                          state.detail?.voteAverage ?? 0),
                                       showTimeTap(),
                                     ],
                                   ),
@@ -216,6 +224,127 @@ class _DetailMovieState extends State<DetailMovie>
               Image.asset('assets/icons/ic_calendar.png')
             ],
           ),
+          const SizedBox(height: 16),
+          SizedBox(
+              height: 72,
+              child: ListView(
+                scrollDirection: Axis.horizontal,
+                children: [
+                  Container(
+                    margin: const EdgeInsets.only(right: 10),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFE51937),
+                      borderRadius: BorderRadius.circular(4.0),
+                      // boxShadow: [
+                      //   BoxShadow(
+                      //     color: Colors.grey.withOpacity(0.6),
+                      //     spreadRadius: 2,
+                      //     blurRadius: 7,
+                      //     offset: Offset(0, 0), // changes position of shadow
+                      //   ),
+                      // ],
+                    ),
+                    width: 88,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text('Today',
+                            style: TextStyle(
+                                fontSize: 18, color: Color(0xFFFFFFFF))),
+                        SizedBox(height: 4),
+                        Text('WED',
+                            style: TextStyle(
+                                fontSize: 16, color: Color(0xFFFFFFFF))),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(right: 10),
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFFFFFFF),
+                      borderRadius: BorderRadius.circular(2.0),
+                      // boxShadow: [
+                      //   BoxShadow(
+                      //     color: Colors.grey.withOpacity(0.2),
+                      //     spreadRadius: 5,
+                      //     blurRadius: 7,
+                      //     offset: Offset(0, 0), // changes position of shadow
+                      //   ),
+                      // ],
+                    ),
+                    width: 88,
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text('23 May',
+                            style: TextStyle(
+                                fontSize: 18, color: Color(0xFF0F1B2B))),
+                        SizedBox(height: 4),
+                        Text('THU',
+                            style: TextStyle(
+                                fontSize: 16, color: Color(0x800F1B2B))),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(right: 10),
+                    width: 88,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFFFFFFF),
+                      borderRadius: BorderRadius.circular(2.0),
+                      // boxShadow: [
+                      //   BoxShadow(
+                      //     color: Colors.grey.withOpacity(0.2),
+                      //     spreadRadius: 5,
+                      //     blurRadius: 7,
+                      //     offset: Offset(0, 0), // changes position of shadow
+                      //   ),
+                      // ],
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text('24 May',
+                            style: TextStyle(
+                                fontSize: 18, color: Color(0xFF0F1B2B))),
+                        SizedBox(height: 4),
+                        Text('FRI',
+                            style: TextStyle(
+                                fontSize: 16, color: Color(0x800F1B2B))),
+                      ],
+                    ),
+                  ),
+                  Container(
+                    margin: const EdgeInsets.only(right: 10),
+                    width: 88,
+                    decoration: BoxDecoration(
+                      color: const Color(0xFFFFFFFF),
+                      borderRadius: BorderRadius.circular(2.0),
+                      // boxShadow: [
+                      //   BoxShadow(
+                      //     color: Colors.grey.withOpacity(0.2),
+                      //     spreadRadius: 5,
+                      //     blurRadius: 7,
+                      //     offset: Offset(0, 0), // changes position of shadow
+                      //   ),
+                      // ],
+                    ),
+                    child: Column(
+                      mainAxisAlignment: MainAxisAlignment.center,
+                      children: const [
+                        Text('25 May',
+                            style: TextStyle(
+                                fontSize: 18, color: Color(0xFF0F1B2B))),
+                        SizedBox(height: 4),
+                        Text('SAT',
+                            style: TextStyle(
+                                fontSize: 16, color: Color(0x800F1B2B))),
+                      ],
+                    ),
+                  ),
+                ],
+              )),
+          const SizedBox(height: 35),
           const Text(
             'Chosse Cinema',
             style: TextStyle(
@@ -223,35 +352,158 @@ class _DetailMovieState extends State<DetailMovie>
                 color: Color(0xFF0F1B2B),
                 fontWeight: FontWeight.bold),
           ),
+          const SizedBox(height: 16),
+          DropdownButtonFormField(
+            decoration: InputDecoration(
+              enabledBorder: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(4),
+                borderSide:
+                    const BorderSide(color: Color(0xFFE51937), width: 2),
+              ),
+              border: OutlineInputBorder(
+                borderSide:
+                    const BorderSide(color: Color(0xFFE51937), width: 2),
+                borderRadius: BorderRadius.circular(4),
+              ),
+              filled: true,
+              fillColor: const Color(0xFFFFFFFF),
+            ),
+            value: dropdownValue,
+            icon: Image.asset('assets/icons/ic_triangle-down.png'),
+            style: const TextStyle(fontSize: 18, color: Color(0xFF0F1B2B)),
+            items: <String>[
+              'Paragon Cinema',
+              'Paragon Cinema1',
+              'Paragon Cinema2',
+              'Paragon Cinema3',
+            ].map<DropdownMenuItem<String>>((String value) {
+              return DropdownMenuItem<String>(
+                value: value,
+                child: Text(value),
+              );
+            }).toList(),
+            onChanged: (String? newValue) {
+              setState(() {
+                dropdownValue = newValue!;
+              });
+            },
+          ),
+          const SizedBox(height: 24),
           const Text(
             '2D',
             style: TextStyle(fontSize: 20, color: Color(0x800F1B2B)),
           ),
+          const SizedBox(height: 16),
+          Expanded(
+            child: GridView.count(
+                primary: false,
+                padding: const EdgeInsets.only(left: 10),
+                crossAxisCount: 3,
+                children: [
+                  Container(
+                    height: 48,
+                    width: 102,
+                    color: Colors.teal[100],
+                    child: const Center(child: Text('8:30 AM')),
+                  ),
+                  Container(
+                    height: 48,
+                    width: 102,
+                    color: Colors.teal[200],
+                    child: const Center(child: Text('9:30 AM')),
+                  ),
+                  Container(
+                    height: 48,
+                    width: 102,
+                    color: Colors.teal[300],
+                    child: const Center(child: Text('10:00 AM')),
+                  ),
+                  Container(
+                    height: 48,
+                    width: 102,
+                    color: Colors.teal[400],
+                    child: const Center(child: Text('12:30 PM')),
+                  ),
+                  Container(
+                    height: 48,
+                    width: 102,
+                    color: Colors.teal[500],
+                    child: const Center(child: Text('13:45 PM')),
+                  ),
+                  Container(
+                    height: 48,
+                    width: 102,
+                    color: Colors.teal[500],
+                    child: const Center(child: Text('15:00 PM')),
+                  ),
+                ]),
+          ),
+          const SizedBox(height: 24),
           const Text(
             'Imax',
             style: TextStyle(fontSize: 20, color: Color(0x800F1B2B)),
+          ),
+          const SizedBox(height: 16),
+          Expanded(
+            child: GridView.count(
+                primary: false,
+                padding: const EdgeInsets.only(left: 10, top: 16),
+                crossAxisCount: 3,
+                children: [
+                  Container(
+                    height: 48,
+                    width: 102,
+                    color: Colors.teal[100],
+                    child: const Center(child: Text('8:30 AM')),
+                  ),
+                  Container(
+                    height: 48,
+                    width: 102,
+                    color: Colors.teal[200],
+                    child: const Center(child: Text('9:30 AM')),
+                  ),
+                  Container(
+                    height: 48,
+                    width: 102,
+                    color: Colors.teal[300],
+                    child: const Center(child: Text('10:00 AM')),
+                  ),
+                  Container(
+                    height: 48,
+                    width: 102,
+                    color: Colors.teal[400],
+                    child: const Center(child: Text('12:30 PM')),
+                  ),
+                  Container(
+                    height: 48,
+                    width: 102,
+                    color: Colors.teal[500],
+                    child: const Center(child: Text('13:45 PM')),
+                  ),
+                  Container(
+                    height: 48,
+                    width: 102,
+                    color: Colors.teal[500],
+                    child: const Center(child: Text('15:00 PM')),
+                  ),
+                ]),
+          ),
+          const SizedBox(height: 38),
+          UserElevatedButton(
+            onPressed: () {},
+            text: 'Get Ticket',
           )
         ],
       ),
     );
   }
 
-  Widget reviewsTap(String rate) {
+  Widget reviewsTap(double rate) {
     return Padding(
       padding: const EdgeInsets.all(20.0),
       child: Column(
         children: [
-          Text(
-            rate,
-            style: const TextStyle(
-                fontSize: 32,
-                color: Color(0xFF0F1B2B),
-                fontWeight: FontWeight.bold),
-          ),
-          const Text(
-            '38 Reviews',
-            style: TextStyle(fontSize: 18, color: Color(0x800F1B2B)),
-          ),
+          StarItem(rate: rate),
         ],
       ),
     );
@@ -268,12 +520,23 @@ class _DetailMovieState extends State<DetailMovie>
             style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 10),
-          Text(
+          ReadMoreText(
             text,
-            // state.detail?.overview ?? '',
             style: const TextStyle(
               fontSize: 16,
               color: Color(0x800F1B2B),
+            ),
+            trimLength: 150,
+            trimLines: 2,
+            moreStyle: const TextStyle(
+              fontSize: 16,
+              color: Color(0xFF47CFFF),
+            ),
+            trimCollapsedText: 'Show more',
+            trimExpandedText: 'Show less',
+            lessStyle: const TextStyle(
+              fontSize: 16,
+              color: Color(0xFF47CFFF),
             ),
           ),
           const SizedBox(height: 20),
@@ -285,7 +548,12 @@ class _DetailMovieState extends State<DetailMovie>
                 style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
               ),
               TextButton(
-                onPressed: () {},
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const CastCrew()));
+                },
                 child: const Text(
                   'View All',
                   style: TextStyle(
@@ -298,12 +566,22 @@ class _DetailMovieState extends State<DetailMovie>
             ],
           ),
           const SizedBox(height: 10),
-          //Thêm diễn viên
-          Row(
-            children: [
-              Image.asset('assets/icons/ic_calendar.png'),
-              const Text('Keanu Reeves')
-            ],
+          // _castAndCrew(),
+          Expanded(
+            child: ListView.builder(
+              itemCount: 4,
+              itemBuilder: (context, index) {
+                return Row(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: [
+                    Expanded(flex: 1, child: Container()),
+                    const Expanded(flex: 3, child: Text('nameCast')),
+                    const Expanded(flex: 1, child: Text('...')),
+                    const Expanded(flex: 2, child: Text('Name')),
+                  ],
+                );
+              },
+            ),
           ),
           const SizedBox(height: 20),
           Row(
@@ -426,78 +704,36 @@ class _DetailMovieState extends State<DetailMovie>
           ),
           const SizedBox(height: 10),
           Expanded(
-            child: ListView(
+            child: ListView.builder(
+              shrinkWrap: true,
               scrollDirection: Axis.horizontal,
-              children: [
-                Column(
-                  children: [
-                    Container(
-                        margin: const EdgeInsets.only(right: 10),
-                        color: Colors.redAccent,
-                        width: 104,
-                        height: 72),
-                    const Text(
-                      '3 hours ago',
-                      style: TextStyle(fontSize: 14, color: Color(0x800F1B2B)),
-                    ),
-                    const Text(
-                      'Female Action Starts We Can\'t Wait',
-                      style: TextStyle(fontSize: 16, color: Color(0xFF0F1B2B)),
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Container(
-                        margin: const EdgeInsets.only(right: 10),
-                        color: Colors.redAccent,
-                        width: 104,
-                        height: 72),
-                    const Text(
-                      '3 hours ago',
-                      style: TextStyle(fontSize: 14, color: Color(0x800F1B2B)),
-                    ),
-                    const Text(
-                      'Female Action Starts We Can\'t Wait',
-                      style: TextStyle(fontSize: 16, color: Color(0xFF0F1B2B)),
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Container(
-                        margin: const EdgeInsets.only(right: 10),
-                        color: Colors.redAccent,
-                        width: 104,
-                        height: 72),
-                    const Text(
-                      '3 hours ago',
-                      style: TextStyle(fontSize: 14, color: Color(0x800F1B2B)),
-                    ),
-                    const Text(
-                      'Female Action Starts We Can\'t Wait',
-                      style: TextStyle(fontSize: 16, color: Color(0xFF0F1B2B)),
-                    ),
-                  ],
-                ),
-                Column(
-                  children: [
-                    Container(
-                        margin: const EdgeInsets.only(right: 10),
-                        color: Colors.redAccent,
-                        width: 104,
-                        height: 72),
-                    const Text(
-                      '3 hours ago',
-                      style: TextStyle(fontSize: 14, color: Color(0x800F1B2B)),
-                    ),
-                    const Text(
-                      'Female Action Starts We Can\'t Wait',
-                      style: TextStyle(fontSize: 16, color: Color(0xFF0F1B2B)),
-                    ),
-                  ],
-                ),
-              ],
+              itemCount: 4,
+              itemBuilder: (context, index) {
+                return SingleChildScrollView(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Container(
+                          margin: const EdgeInsets.only(right: 10),
+                          color: Colors.redAccent,
+                          width: 164,
+                          height: 120),
+                      const SizedBox(height: 12),
+                      const Text(
+                        '3 hours ago',
+                        style:
+                            TextStyle(fontSize: 14, color: Color(0x800F1B2B)),
+                      ),
+                      const SizedBox(height: 4),
+                      const Text(
+                        'Female Action',
+                        style:
+                            TextStyle(fontSize: 16, color: Color(0xFF0F1B2B)),
+                      ),
+                    ],
+                  ),
+                );
+              },
             ),
           )
         ],
@@ -596,6 +832,19 @@ class _DetailMovieState extends State<DetailMovie>
       ),
     );
   }
+
+  // Widget _castAndCrew() {
+  //   return BlocBuilder<DetailMovieCubit,DetailMovieState>(builder: (context, state) {
+  //     List<Cast> castEntity = state.castResponse?.cast ?? [];
+  //     List<CastItemWidget> itemCast = castEntity.map((e) => CastItemWidget(castEntity: e)).toList();
+  //     return Padding(
+  //       padding: const EdgeInsets.all(8.0),
+  //       child: ListView(
+  //         children: itemCast,
+  //       ),
+  //     );
+  //   },);
+  // }
 
   void _onDetailPress() {
     _pageController.animateToPage(0,

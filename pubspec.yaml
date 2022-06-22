@@ -44,6 +44,9 @@ dependencies:
   cached_network_image: ^3.2.0
   #Splash
   easy_splash_screen: ^1.0.3
+  #widget
+  readmore: ^2.1.0
+  flutter_rating_bar: ^4.0.1
 
 dev_dependencies:
   flutter_test:
@@ -75,6 +78,7 @@ flutter:
   assets:
     - assets/icons/
     - assets/logos/
+    - assets/image/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

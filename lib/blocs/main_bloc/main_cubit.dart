@@ -7,8 +7,4 @@ class MainCubit extends Cubit<MainState> {
   void tap(int index) {
     emit(state.copyWith(selectIndex: index));
   }
-
-  void click() {
-    emit(state.copyWith(tab: true));
-  }
 }

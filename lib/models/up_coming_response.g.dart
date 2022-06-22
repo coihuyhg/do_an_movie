@@ -13,7 +13,7 @@ UpComingResponse _$UpComingResponseFromJson(Map<String, dynamic> json) =>
           : Dates.fromJson(json['dates'] as Map<String, dynamic>),
       page: json['page'] as int?,
       results: (json['results'] as List<dynamic>?)
-          ?.map((e) => Result.fromJson(e as Map<String, dynamic>))
+          ?.map((e) => Result1.fromJson(e as Map<String, dynamic>))
           .toList(),
       totalPages: json['totalPages'] as int?,
       totalResults: json['totalResults'] as int?,
@@ -28,7 +28,7 @@ Map<String, dynamic> _$UpComingResponseToJson(UpComingResponse instance) =>
       'totalResults': instance.totalResults,
     };
 
-Result _$ResultFromJson(Map<String, dynamic> json) => Result(
+Result1 _$ResultFromJson(Map<String, dynamic> json) => Result1(
       adult: json['adult'] as bool?,
       backdropPath: json['backdropPath'] as String?,
       genreIds:
@@ -49,7 +49,7 @@ Result _$ResultFromJson(Map<String, dynamic> json) => Result(
       voteCount: json['vote_count'] as int?,
     );
 
-Map<String, dynamic> _$ResultToJson(Result instance) => <String, dynamic>{
+Map<String, dynamic> _$ResultToJson(Result1 instance) => <String, dynamic>{
       'adult': instance.adult,
       'backdropPath': instance.backdropPath,
       'genreIds': instance.genreIds,

@@ -1,12 +1,12 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import '../../../models/now_play_response.dart';
+import '../../../models/up_coming_response.dart';
 
-class MovieItemWidget extends StatelessWidget {
-  final Result resultEntity;
-  final VoidCallback onTap;
+class MovieItemUpComingWidget extends StatelessWidget {
+  final Result1 resultEntity;
+  final ValueChanged<Result1> onTap;
 
-  const MovieItemWidget({
+  const MovieItemUpComingWidget({
     Key? key,
     required this.resultEntity,
     required this.onTap,
@@ -15,7 +15,9 @@ class MovieItemWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: onTap,
+      onTap: () {
+        onTap.call(resultEntity);
+      },
       child: Container(
         margin: const EdgeInsets.all(5),
         child: Column(

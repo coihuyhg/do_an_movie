@@ -1,3 +1,4 @@
+import 'package:do_an_movie/models/cast_response.dart';
 import 'package:do_an_movie/models/detail_response.dart';
 import 'package:do_an_movie/models/now_play_response.dart';
 import 'package:do_an_movie/models/up_coming_response.dart';
@@ -7,6 +8,7 @@ abstract class MovieRepository {
   Future<NowPlayingResponse>? getNowMovie();
   Future<UpComingResponse>? getUpComingMovie();
   Future<DetailResponse>? getDetailMovie(String movieId);
+  Future<CastResponse>? getCast(String movieId);
 }
 
 class MovieRepositoryImpl extends MovieRepository {
@@ -29,5 +31,10 @@ class MovieRepositoryImpl extends MovieRepository {
   @override
   Future<DetailResponse>? getDetailMovie(String movieId) async {
     return await _apiClient.getDetail(movieId);
+  }
+
+  @override
+  Future<CastResponse>? getCast(String movieId) async {
+    return await _apiClient.getCast(movieId);
   }
 }
